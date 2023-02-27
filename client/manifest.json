@@ -1,0 +1,16 @@
+{
+  "short_name": "HOME PRODUCTION ",
+  "name": "AHP STORE ",
+  "icons": [
+    {
+      "src": "/client/assets/images/logo/favicon.svg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/client/",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/client/",
+  "theme_color": "#3367D6"
+}
