@@ -7,26 +7,26 @@ var cacheName = `my-cache-${version}`;
 var allPostsCaching = false;
 
 var cacheFiles = [
-  '/client/',
-  '/client/katalog.php',
-  '/client/assets/css/pages/filepond.css',
-  '/client/assets/extensions/filepond/filepond.js',
-  '/client/assets/extensions/jquery/jquery.min.js',
-  '/client/assets/extensions/simple-datatables/umd/simple-datatables.js',
-  '/client/assets/extensions/sweetalert2/sweetalert2.min.js',
-  '/client/assets/extensions/toastify-js/src/toastify.js',
-  '/client/assets/images/logo/favicon.png',
-  '/client/assets/images/logo/favicon.svg',
-  '/client/assets/images/produk/.p1.jpeg',
-  '/client/assets/images/produk/.p2.jpeg',
-  '/client/assets/images/produk/.p3.jpeg',
-  '/client/assets/js/db/idb-keyval-iife.min.js',
-  '/client/assets/js/main.js',
-  '/client/assets/js/pages/filepond.js',
-  '/client/assets/js/pages/simple-datatables.js',
-  '/client/assets/js/sweetalert2/sweetalert2.js',
-  '/client/manifest.json',
-  '/client/sw.js'
+  '/',
+  '/katalog.php',
+  '/assets/css/pages/filepond.css',
+  '/assets/extensions/filepond/filepond.js',
+  '/assets/extensions/jquery/jquery.min.js',
+  '/assets/extensions/simple-datatables/umd/simple-datatables.js',
+  '/assets/extensions/sweetalert2/sweetalert2.min.js',
+  '/assets/extensions/toastify-js/src/toastify.js',
+  '/assets/images/logo/favicon.png',
+  '/assets/images/logo/favicon.svg',
+  '/assets/images/produk/.p1.jpeg',
+  '/assets/images/produk/.p2.jpeg',
+  '/assets/images/produk/.p3.jpeg',
+  '/assets/js/db/idb-keyval-iife.min.js',
+  '/assets/js/main.js',
+  '/assets/js/pages/filepond.js',
+  '/assets/js/pages/simple-datatables.js',
+  '/assets/js/sweetalert2/sweetalert2.js',
+  '/manifest.json',
+  '/sw.js'
 ];
 self.addEventListener('install', onInstall);
 self.addEventListener('activate', onActivate);
