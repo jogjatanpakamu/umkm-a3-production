@@ -4,13 +4,24 @@
 function getPesanan()
 {
 
-    return json_decode(file_get_contents(__DIR__ . '/data/dataPesanan.json'), false);
+    $koneksi = new mysqli('localhost', 'root', '', 'sablon');
+    $sql = "SELECT pesanan.id as pesid,pesanan.status as pstatus,pesanan.* ,users.*  
+    FROM pesanan
+    JOIN users ON pesanan.user_id = users.id
+     ORDER BY pesid DESC";
+    $r = mysqli_query($koneksi, $sql);
+    $data = [];
+    while ($produks = mysqli_fetch_assoc($r)) {
+        $data[] = $produks;
+    }
+
+    return $data;
 }
 
 function insertPesanan($data)
 {
 
-    $pesid = $_COOKIE['log'];
+    $pesid = $_COOKIE['uuid'];
     $id = rand(1000000, 2000000);
     $produk_id = $data['produk_id'];
     $tgl_pesan = date('Y-m-d');

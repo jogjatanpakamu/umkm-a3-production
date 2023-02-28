@@ -69,7 +69,7 @@ $riwayat = getRiwayatId($id);
                       <div class="row">
                         <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
                           <a href="#">
-                            <img class="w-100 active" src="<?= $riwayat['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
+                            <img class="w-100 active" src="assets/images/produk/.<?= $riwayat['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
                           </a>
                         </div>
                         <div class="col-6 mb-2">

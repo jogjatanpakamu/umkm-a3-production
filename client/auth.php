@@ -22,9 +22,11 @@ if (isset($_POST['login'])) {
 }
 
 
-if (isset($_GET['log'])) {
+if (isset($_GET['isLoggedIn'])) {
 
-    setcookie('log', '');
+    setcookie('isLoggedIn', '');
+    setcookie('uuidstatus', null);
+    setcookie('uuid', null);
     header('location:login.php');
 }
 

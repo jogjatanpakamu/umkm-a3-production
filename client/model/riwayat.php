@@ -2,13 +2,12 @@
 
 function getRiwayat()
 {
-    $id = $_COOKIE['log'];
+    $id = $_COOKIE['uuid'];
     $koneksi = new mysqli('localhost', 'root', '', 'sablon');
-
-    $sql = "SELECT pesanan.id as pesid,pesanan.* ,kategori.*, produk.nama as namaproduk,produk.* 
+    $sql = "SELECT pesanan.id as pesid,pesanan.* , kategori.*, produk.nama as namaproduk,produk.* 
     FROM pesanan
      JOIN produk ON pesanan.produk_id = produk.id 
-     JOIN kategori ON produk.id = kategori.id 
+     JOIN kategori ON produk.kategori = kategori.id 
     WHERE pesanan.user_id='$id'";
     $r = mysqli_query($koneksi, $sql);
     $data = [];

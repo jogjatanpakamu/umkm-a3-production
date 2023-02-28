@@ -4,7 +4,10 @@ function getProduks()
 {
 
     $koneksi = new mysqli('localhost', 'root', '', 'sablon');
-    $sql = "SELECT *  FROM produk";
+    $sql = "SELECT produk.id as pesid ,produk.*, kategori.*  
+    FROM produk 
+    INNER JOIN kategori ON produk.kategori = kategori.id
+    ";
     $r = mysqli_query($koneksi, $sql);
     $data = [];
     while ($produks = mysqli_fetch_assoc($r)) {
@@ -19,7 +22,7 @@ function getProdukId($id)
     $barang = getProduks();
 
     foreach ($barang as $brg) {
-        if ($brg['id'] == $id) {
+        if ($brg['pesid'] == $id) {
             return $brg;
         }
     }

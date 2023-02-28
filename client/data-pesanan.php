@@ -1,22 +1,13 @@
 <?php
-require_once 'header.php';
-require_once 'model/produk.php';
-
-
-$conn = new mysqli('localhost', 'root', '', 'sablon');
-
-
-$r = mysqli_query($conn, "SELECT produk.id as pesid ,produk.*, kategori.*   FROM produk
-   JOIN kategori ON kategori.id = produk.kategori
-      ");
-
-$data = [];
-while ($produks = mysqli_fetch_assoc($r)) {
-    $data[] = $produks;
+if (!$_COOKIE['isLoggedIn']) {
+    return  header("Location:login.php");
 }
-$data;
-?>
+require_once 'header.php';
+require_once 'model/pesanan.php';
 
+$riwayat = getPesanan();
+
+?>
 <div id="app">
     <div id="sidebar" class="active">
         <div class="sidebar-wrapper active">
@@ -59,41 +50,40 @@ $data;
         <div id="main-content">
             <div id="main-content">
                 <div class="page-heading">
-                    <div class="d-flex">
-                        <div class="page-title mb-5 me-3">
-                            <a href="add-produk.php" class="btn btn-primary"> TAMBAH PRODUK</a>
-                        </div>
-                        <div class="page-title mb-5">
-                            <a href="add-kategori.php" class="btn btn-primary"> TAMBAH KATEGORI</a>
-                        </div>
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>Riwayat Belanja Kamu</h3>
 
-
+                            </div>
+                        </div>
                     </div>
-
                     <section class="section">
-
                         <div class="card">
                             <div class="card-body">
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Action</th>
-
+                                            <th>KODE PESANAN</th>
+                                            <th>TANGGAL PESAN</th>
+                                            <th>NAMA PEMESAN</th>
+                                            <th>Status</th>
+                                            <th>ACtion</th>
                                         </tr>
                                     </thead>
-                                    <tbody><?php foreach ($data as $r) : ?>
+                                    <tbody><?php foreach ($riwayat as $r) : ?>
                                             <tr>
-                                                <td><?= $r['bahan'] ?></td>
-                                                <td><?= $r['jenis'] ?></td>
-
+                                                <td><?= $r['nama'] ?></td>
+                                                <td><?= $r['tgl_pesan'] ?></td>
+                                                <td><?= $r['nama'] ?></td>
                                                 <td>
-                                                    <form action="tambah-produk.php" method="post">
-                                                        <input type="hidden" value="<?= $r['pesid'] ?>" name="idproduk">
-                                                        <input type="submit" class="btn btn-sm btn-danger" name="hapusproduk" value="HAPUS">
-                                                    </form>
-
+                                                    <?php if ($r['pstatus'] == 1) : ?>
+                                                        <span class="badge bg-success">Sudah di konfirmasi </a>
+                                                        <?php else : ?>
+                                                            <a href="konfirmasi-pesanan.php?pesid=<?= $r['pesid'] ?>" class="badge bg-success">Konfirmasi </a>
+                                                        <?php endif; ?>
+                                                </td>
+                                                <td> <a id="btn-wa-konfirmasi" data-id="<?= $r['telpon'] ?>" class="badge bg-primary">Hubungi pemesan </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -101,34 +91,8 @@ $data;
                                 </table>
                             </div>
                         </div>
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>Bahan</th>
-                                            <th>Jenis</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody><?php foreach ($data as $r) : ?>
-                                            <tr>
-                                                <td><?= $r['bahan'] ?></td>
-                                                <td><?= $r['jenis'] ?></td>
-
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </section>
-
                 </div>
-                <!-- card order -->
-
 
             </div>
         </div>

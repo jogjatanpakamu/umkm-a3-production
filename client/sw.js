@@ -1,10 +1,14 @@
-// the cache version gets updated every time there is a new deployment
-const CACHE_VERSION = 121;
-const CURRENT_CACHE = `main-${CACHE_VERSION}`;
+'use strict';
+
+const version = 12;
 var isOnline = true;
-// these are the routes we are going to cache for offline support
-const cacheFiles = [
+var isLoggedIn = false;
+var cacheName = `my-cache-${version}`;
+var allPostsCaching = false;
+
+var cacheFiles = [
   '/client/',
+  '/client/katalog.php',
   '/client/assets/css/pages/filepond.css',
   '/client/assets/extensions/filepond/filepond.js',
   '/client/assets/extensions/jquery/jquery.min.js',
@@ -24,6 +28,10 @@ const cacheFiles = [
   '/client/manifest.json',
   '/client/sw.js'
 ];
+self.addEventListener('install', onInstall);
+self.addEventListener('activate', onActivate);
+self.addEventListener('message', onMessage);
+self.addEventListener('fetch', onFetch);
 
 main().catch(console.error);
 
@@ -31,30 +39,51 @@ async function main() {
   await sendMessage({ requestStatusUpdate: true });
 }
 
-// on install we download the routes we want to cache for offline
-self.addEventListener('install', evt =>
-  evt.waitUntil(
-    caches.open(CURRENT_CACHE).then(cache => {
-      return cache.addAll(cacheFiles);
-    })
-  )
-);
+async function onInstall(event) {
+  console.log(`[Service Worker] (${version}) installed.`);
 
-// on activation we clean up the previously registered service workers
-self.addEventListener('activate', evt =>
-  evt.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CURRENT_CACHE) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }),
-    evt.waitUntil(clients.claim())
-  )
-);
+  caches.open(cacheName).then(cache => {
+    return cache.addAll(cacheFiles);
+  });
+
+  self.skipWaiting();
+}
+
+function onActivate(event) {
+  event.waitUntil(handleActivation());
+}
+
+async function handleActivation() {
+  await caches.keys().then(cache => {
+    return Promise.all(
+      cache.map(cache => {
+        if (cache !== cacheName) {
+          return caches.delete(cacheName);
+        }
+      })
+    );
+  }),
+    await clients.claim();
+  console.log(`[Service Worker] (${version}) activated.`);
+}
+
+async function sendMessage(msg) {
+  var allClients = await clients.matchAll({ includeUncontrolled: true });
+  return Promise.all(
+    allClients.map(function clientMsg(client) {
+      var chan = new MessageChannel();
+      chan.port1.onmessage = onMessage;
+      return client.postMessage(msg, [chan.port2]);
+    })
+  );
+}
+
+function onMessage({ data }) {
+  if (data.statusUpdate) {
+    ({ isOnline, isLoggedIn } = data.statusUpdate);
+    console.log(`[Service Worker] (v${version}) status update, isOnline:${isOnline}, isLoggedIn:${isLoggedIn}`);
+  }
+}
 
 // fetch the resource from the network
 const fromNetwork = (request, timeout) =>
@@ -69,34 +98,12 @@ const fromNetwork = (request, timeout) =>
 
 // fetch the resource from the browser cache
 const fromCache = request =>
-  caches.open(CURRENT_CACHE).then(cache => cache.match(request).then(matching => matching || cache.match('/client/katalog.php')));
+  caches.open(cacheName).then(cache => cache.match(request).then(matching => matching || cache.match('/client/katalog.php')));
 
 // cache the current page to make it available for offline
-const update = request => caches.open(CURRENT_CACHE).then(cache => fetch(request).then(response => cache.put(request, response)));
+const update = request => caches.open(cacheName).then(cache => fetch(request).then(response => cache.put(request, response)));
 
-// on message
-self.addEventListener('message', evt => {
-  if (evt.data.statusUpdate) {
-    ({ isOnline, isLoggedIn } = evt.data.statusUpdate);
-    console.log(`[Service Worker] (v${CACHE_VERSION}) status update, isOnline:${isOnline}`);
-  }
-});
-
-async function sendMessage(msg) {
-  var allClients = await clients.matchAll({ includeUncontrolled: true });
-  return Promise.all(
-    allClients.map(function clientMsg(client) {
-      var chan = new MessageChannel();
-      chan.port1.onmessage = onMessage;
-      return client.postMessage(msg, [chan.port2]);
-    })
-  );
+function onFetch(event) {
+  event.respondWith(fromNetwork(event.request, 10000).catch(() => fromCache(event.request)));
+  //   event.waitUntil(update(event.request));
 }
-
-// general strategy when making a request (eg if online try to fetch it
-// from the network with a timeout, if something fails serve from cache)
-
-self.addEventListener('fetch', evt => {
-  evt.respondWith(fromNetwork(evt.request, 10000).catch(() => fromCache(evt.request)));
-  evt.waitUntil(update(evt.request));
-});

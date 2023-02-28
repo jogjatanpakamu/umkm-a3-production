@@ -8,6 +8,7 @@ require_once 'model/riwayat.php';
 
 $riwayat = getRiwayat();
 
+
 ?>
 <div id="app">
   <div id="sidebar" class="active">
@@ -76,9 +77,11 @@ $riwayat = getRiwayat();
                       <tr>
                         <td><?= $r['nama'] ?></td>
                         <td><?= $r['tgl_pesan'] ?></td>
-                        <td><?= $r['status'] == 0 ? 'Menunggu' : 'Diproses' ?></td>
+                        <td><?= $r['status'] == 0 ? 'Menunggu' : 'dikonfirmasi' ?></td>
                         <td>
-                          <a id="btn-wa" data-id="<?= $r['pesid'] ?>" class="badge bg-success">Konfirmasi </a>
+                          <?php if ($r['status'] != 1) : ?>
+                            <a id="btn-wa" data-id="<?= $r['pesid'] ?>" class="badge bg-success">Konfirmasi </a>
+                          <?php endif; ?>
                           <a href="konfirmasi-pembayaran.php?pesid=<?= $r['pesid'] ?>" class="badge bg-success">detail</a>
                         </td>
                       </tr>

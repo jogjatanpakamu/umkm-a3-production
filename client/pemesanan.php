@@ -15,8 +15,6 @@ if (!$produk) {
 }
 
 
-var_dump($produk);
-die;
 ?>
 
 <div id="app">
@@ -109,7 +107,7 @@ die;
               <div class="card-content">
                 <div class="card-body">
                   <form id="form_data_pesanan" class="form form-horizontal">
-                    <input type="hidden" name="produk_id" id="produk_id" value="<?= $produk['id'] ?>">
+                    <input type="hidden" name="produk_id" id="produk_id" value="<?= $produk['pesid'] ?>">
                     <div class="form-body">
                       <div class="row">
                         <div class="col-md-4">

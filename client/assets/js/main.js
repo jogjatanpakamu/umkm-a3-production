@@ -1,22 +1,22 @@
 (function Main() {
   'use strict';
 
-  var offlineIcon;
   var isOnline = 'onLine' in navigator ? navigator.onLine : true;
+  var isLoggedIn = /isLoggedIn=1/.test(document.cookie.toString() || '');
   var usingSW = 'serviceWorker' in navigator;
   var swRegistration;
   var svcworker;
   let data_pesanan = '';
-  var isLoggedIn = /uuid=1/.test(document.cookie.toString() || '');
 
   document.addEventListener('DOMContentLoaded', ready, false);
 
-  initServiceWorker().catch(console.error);
+  if (usingSW) {
+    initServiceWorker().catch(console.error);
+  }
 
   function ready() {
     window.addEventListener('online', function online() {
       isOnline = true;
-      backupPost();
       sendStatusUpdate();
     });
 
@@ -42,17 +42,18 @@
     navigator.serviceWorker.addEventListener('message', onSWMessage);
   }
 
-  async function backupPost() {
-    await idbKeyval.set('add-post-backup', {
-      title: 'teset',
-      post: 'teset'
-    });
-  }
+  // async function backupPost() {
+  //   await idbKeyval.set('add-post-backup', {
+  //     title: 'teset',
+  //     post: 'teset'
+  //   });
+  // }
 
   function onSWMessage(event) {
+    console.log(event);
     var { data } = event;
     if (data.requestStatusUpdate) {
-      console.log('Received status update request from service worker, responding...');
+      console.log('Received status, responding...');
       sendStatusUpdate(event.ports && event.ports[0]);
     } else if (data == 'force-logout') {
       document.cookie = 'isLoggedIn=';
@@ -62,7 +63,7 @@
   }
 
   function sendStatusUpdate(target) {
-    sendSWMessage({ statusUpdate: { isOnline } }, target);
+    sendSWMessage({ statusUpdate: { isOnline, isLoggedIn } }, target);
   }
 
   function sendSWMessage(msg, target) {
@@ -81,7 +82,7 @@
     const data = form.reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {});
     data_pesanan = data;
   });
-
+  console.log(isLoggedIn);
   $('#btn_pesan').on('click', function () {
     if (isLoggedIn) {
       if (isOnline) {
@@ -143,4 +144,16 @@
     }
     return false;
   });
-})();
+  $('body').on('click', '#btn-wa-konfirmasi', function () {
+    const id = $(this).data('id');
+    var win = window.open(
+      'https://api.whatsapp.com/send?phone=' + id + '&text=hallo%20kak%2C%20pesanan%20kamu%20sudah%20di%20konfirmasi%20ya'
+    );
+    if (win) {
+      win.focus();
+    } else {
+      alert('Please allow popups for this website');
+    }
+    return false;
+  });
+})(window);

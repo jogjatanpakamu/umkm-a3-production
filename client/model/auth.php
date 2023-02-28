@@ -8,10 +8,10 @@ function auth($username, $password)
 
     $user = mysqli_fetch_assoc($r);
     if (!$user) {
-        header('location:login.php');
+        return  header('location:login.php');
     }
-    setcookie('log', $user['id']);
-    setcookie('uuid', 1);
+    setcookie('isLoggedIn', 1);
+    setcookie('uuid',  $user['id']);
     setcookie('uuidstatus', $user['status']);
     return $user;
 }
@@ -30,7 +30,7 @@ function daftar($nama, $username, $password)
 function keluar()
 {
 
-    return   setcookie('log', null);
+    return   setcookie('isLoggedIn', null);
     return   setcookie('uuidstatus', null);
     return   setcookie('uuid', null);
 }

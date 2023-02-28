@@ -39,44 +39,50 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <?php  ?>
-                <li class="sidebar-item">
-                    <a href="produk.php" class="sidebar-link">
-                        <i class="bi bi-image-fill"></i>
-                        <span>DATA PRODUK</span>
-                    </a>
-                </li>
-
-                <?php if (isset($_COOKIE['uudi']) == '1') : ?>
+                <?php if (isset($_COOKIE['uuidstatus']) && $_COOKIE['uuidstatus'] != '2') : ?>
                     <li class="sidebar-item">
-                        <a href="katalog.php" class="sidebar-link">
-                            <i class="bi bi-image-fill"></i>
-                            <span>Katalog Produk</span>
+                        <a href="produk.php" class="sidebar-link">
+                            <i class="bi  bi-grid-fill"></i>
+                            <span>Data Produk</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="data-pesanan.php" class="sidebar-link">
+                            <i class="bi  bi-grid-fill"></i>
+                            <span>Data Pemesanan</span>
                         </a>
                     </li>
                 <?php endif; ?>
 
-                <li class="sidebar-title">Halaman belanja</li>
-
                 <li class="sidebar-item">
-                    <a href="riwayat-belanja.php" class="sidebar-link">
-                        <i class="bi bi-basket-fill"></i>
-                        <span>Riwayat Belanja</span>
+                    <a href="katalog.php" class="sidebar-link">
+                        <i class="bi bi-image-fill"></i>
+                        <span>Katalog Produk</span>
                     </a>
                 </li>
 
-                <li class="sidebar-title">akun saya</li>
-                <?php if (isset($_COOKIE['log'])) : ?>
+                <?php if (isset($_COOKIE['uuidstatus']) && $_COOKIE['uuidstatus'] != '1') : ?>
+
+                    <li class="sidebar-title">Halaman belanja</li>
+
                     <li class="sidebar-item">
+                        <a href="riwayat-belanja.php" class="sidebar-link">
+                            <i class="bi bi-basket-fill"></i>
+                            <span>Riwayat Belanja</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <li class="sidebar-title">akun saya</li>
+                <?php if (isset($_COOKIE['isLoggedIn'])) : ?>
+                    <!-- <li class="sidebar-item">
                         <a href="#" class="sidebar-link">
                             <i class="icon-mid bi bi-person"></i>
                             <span>Profile</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="sidebar-item">
-                        <a href="auth.php?log" class="sidebar-link">
+                        <a href="auth.php?isLoggedIn" class="sidebar-link">
                             <i class="icon-mid bi bi-box-arrow-left"></i>
                             <span>Keluar</span>
                         </a>

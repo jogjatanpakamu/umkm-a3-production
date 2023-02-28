@@ -5,9 +5,6 @@ require_once 'model/produk.php';
 $produk = getProduks();
 
 
-var_dump($produk);
-die;
-
 ?>
 <div id="app">
   <?php include_once 'sidebar.php' ?>
@@ -39,7 +36,7 @@ die;
                     <li class="list-group-item"><?= $dt['jenis'] ?></li>
                     <li class="list-group-item"><?= $dt['bahan'] ?></li>
 
-                    <li class="list-group-item"><a href="pemesanan.php?id=<?= $dt['id'] ?>" class="btn btn-outline-primary w-100">Lihat</a></li>
+                    <li class="list-group-item"><a href="pemesanan.php?id=<?= $dt['pesid'] ?>" class="btn btn-outline-primary w-100">Lihat</a></li>
 
                   </ul>
                 </div>
