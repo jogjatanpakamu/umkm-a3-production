@@ -50,50 +50,48 @@ $riwayat = getRiwayat();
   <div id="main" class="layout-navbar navbar-fixed">
     <?php include_once 'navbar.php' ?>
     <div id="main-content">
-      <div id="main-content">
-        <div class="page-heading">
-          <div class="page-title">
-            <div class="row">
-              <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Riwayat Belanja Kamu</h3>
+      <div class="page-heading">
+        <div class="page-title">
+          <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+              <h3>Riwayat Belanja Kamu</h3>
 
-              </div>
             </div>
           </div>
-          <section class="section">
-            <div class="card">
-              <div class="card-body">
-                <table class="table table-striped" id="table1">
-                  <thead>
-                    <tr>
-                      <th>Produk</th>
-                      <th>Tanggal</th>
-
-                      <th>Status</th>
-                      <th>ACtion</th>
-                    </tr>
-                  </thead>
-                  <tbody><?php foreach ($riwayat as $r) : ?>
-                      <tr>
-                        <td><?= $r['nama'] ?></td>
-                        <td><?= $r['tgl_pesan'] ?></td>
-                        <td><?= $r['status'] == 0 ? 'Menunggu' : 'dikonfirmasi' ?></td>
-                        <td>
-                          <?php if ($r['status'] != 1) : ?>
-                            <a id="btn-wa" data-id="<?= $r['pesid'] ?>" class="badge bg-success">Konfirmasi </a>
-                          <?php endif; ?>
-                          <a href="konfirmasi-pembayaran.php?pesid=<?= $r['pesid'] ?>" class="badge bg-success">detail</a>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
         </div>
+        <section class="section">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-striped" id="table1">
+                <thead>
+                  <tr>
+                    <th>Produk</th>
+                    <th>Tanggal</th>
 
+                    <th>Status</th>
+                    <th>ACtion</th>
+                  </tr>
+                </thead>
+                <tbody><?php foreach ($riwayat as $r) : ?>
+                    <tr>
+                      <td><?= $r['nama'] ?></td>
+                      <td><?= $r['tgl_pesan'] ?></td>
+                      <td><?= $r['status'] == 0 ? 'Menunggu' : 'dikonfirmasi' ?></td>
+                      <td>
+                        <?php if ($r['status'] != 1) : ?>
+                          <a id="btn-wa" data-id="<?= $r['pesid'] ?>" class="badge bg-success">Konfirmasi </a>
+                        <?php endif; ?>
+                        <a href="konfirmasi-pembayaran.php?pesid=<?= $r['pesid'] ?>" class="badge bg-success">detail</a>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </div>
+
     </div>
   </div>
   <?php include_once 'footer.php' ?>

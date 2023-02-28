@@ -48,65 +48,64 @@ $riwayat = getRiwayatId($id);
   <div id="main" class="layout-navbar navbar-fixed">
     <?php include_once 'navbar.php' ?>
     <div id="main-content">
-      <div id="main-content">
-        <div class="page-heading">
-          <div class="page-title">
-            <div class="row">
-              <div class="col-12 col-md-6 order-md-1 order-last">
-                <?= $riwayat['status'] == 1 ? '   <h3>Pesanan kmau sedang di proses </h3>' : '' ?>
-              </div>
+      <div class="page-heading">
+        <div class="page-title">
+          <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+              <?= $riwayat['status'] == 1 ? '   <h3>Pesanan kmau sedang di proses </h3>' : '' ?>
             </div>
           </div>
-          <section class="section">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Detial PESANAN</h4>
-              </div>
-              <div class="card-content">
-                <div class="card-body">
-                  <form id="form_data_pesanan" class="form form-horizontal">
-                    <div class="form-body">
-                      <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
-                          <a href="#">
-                            <img class="w-100 active" src="assets/images/produk/.<?= $riwayat['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
-                          </a>
-                        </div>
-                        <div class="col-6 mb-2">
-                          <label>Nama Pemesan</label>
-                          <input type="text" id="first-name" class="form-control" name="pemesan" value="<?= $riwayat['nama_pemesan'] ?>" />
-                        </div>
-                        <div class="col-6 mb-2">
-                          <label>Email</label>
-                          <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['email'] ?>" />
-                        </div>
-                        <div class="col-6 mb-2">
-                          <label>Telpon</label>
-                          <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['telpon'] ?>" />
-                        </div>
-                        <div class="col-6 mb-2">
-                          <label>Tanggal Pesan</label>
-                          <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['tgl_pesan'] ?>" />
-                        </div>
+        </div>
+        <section class="section">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Detial PESANAN</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <form id="form_data_pesanan" class="form form-horizontal">
+                  <div class="form-body">
+                    <div class="row">
+                      <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
+                        <a href="#">
+                          <img class="w-100 active" src="assets/images/produk/.<?= $riwayat['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
+                        </a>
+                      </div>
+                      <div class="col-6 mb-2">
+                        <label>Nama Pemesan</label>
+                        <input type="text" id="first-name" class="form-control" name="pemesan" value="<?= $riwayat['nama_pemesan'] ?>" />
+                      </div>
+                      <div class="col-6 mb-2">
+                        <label>Email</label>
+                        <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['email'] ?>" />
+                      </div>
+                      <div class="col-6 mb-2">
+                        <label>Telpon</label>
+                        <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['telpon'] ?>" />
+                      </div>
+                      <div class="col-6 mb-2">
+                        <label>Tanggal Pesan</label>
+                        <input type="text" id="first-name" class="form-control" name="fname" value="<?= $riwayat['tgl_pesan'] ?>" />
+                      </div>
 
-                        <div class="col-md-6 form-group">
-                          <label>Nama Produk</label>
-                          <input type="text" id="contact-info" class="form-control" name="contact" value="<?= $riwayat['namaproduk'] ?>" />
-                        </div>
+                      <div class="col-md-6 form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="contact-info" class="form-control" name="contact" value="<?= $riwayat['namaproduk'] ?>" />
+                      </div>
 
-                        <div class="col-12 form-group">
-                          <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea"><?= $riwayat['catatan'] ?></label>
-                          </div>
+                      <div class="col-12 form-group">
+                        <div class="form-floating">
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                          <label for="floatingTextarea"><?= $riwayat['catatan'] ?></label>
                         </div>
                       </div>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
-            <!-- <?php if (!$riwayat['bukti_bayar']) : ?>
+          </div>
+          <!-- <?php if (!$riwayat['bukti_bayar']) : ?>
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Upload Bukti Pembayaran</h4>
@@ -130,14 +129,13 @@ $riwayat = getRiwayatId($id);
                 </div>
               </div>
             <?php endif; ?> -->
-          </section>
-        </div>
-        <!-- card order -->
+        </section>
+      </div>
+      <!-- card order -->
 
-        <!-- <div id="konfirmasi-order">
+      <!-- <div id="konfirmasi-order">
         <button type="button" id="btn_pesan" class="btn btn-primary">konfirmasi-order</button>
       </div> -->
-      </div>
     </div>
   </div>
 

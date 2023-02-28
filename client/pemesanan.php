@@ -57,103 +57,101 @@ if (!$produk) {
   <div id="main" class="layout-navbar navbar-fixed">
     <?php include_once 'navbar.php' ?>
     <div id="main-content">
-      <div id="main-content">
-        <div class="page-heading">
-          <div class="page-title">
-            <div class="row">
+      <div class="page-heading">
+        <div class="page-title">
+          <div class="row">
 
+          </div>
+        </div>
+        <section class="section">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">PRODUK NAMA</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
+                  <a href="#">
+                    <img class="w-100 active" src="assets/images/produk/.<?= $produk['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
+                  </a>
+                </div>
+
+                <div class="col-4 col-sm-6 col-lg-3">
+                  <div class="form-group">
+                    <label for="helperText">Nama Produk</label>
+                    <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['nama'] ?>" />
+                  </div>
+                </div>
+
+                <div class="col-4 col-sm-6 col-lg-3">
+                  <div class="form-group">
+                    <label for="helperText">Bahan</label>
+                    <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['bahan'] ?>" />
+                  </div>
+                </div>
+                <div class="col-4 col-sm-6 col-lg-3">
+                  <div class="form-group">
+                    <label for="helperText">jenis</label>
+                    <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['jenis'] ?>" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <section class="section">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">PRODUK NAMA</h4>
-              </div>
-
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">BUAT PESANAN</h4>
+            </div>
+            <div class="card-content">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
-                    <a href="#">
-                      <img class="w-100 active" src="assets/images/produk/.<?= $produk['foto'] ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
-                    </a>
-                  </div>
-
-                  <div class="col-4 col-sm-6 col-lg-3">
-                    <div class="form-group">
-                      <label for="helperText">Nama Produk</label>
-                      <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['nama'] ?>" />
-                    </div>
-                  </div>
-
-                  <div class="col-4 col-sm-6 col-lg-3">
-                    <div class="form-group">
-                      <label for="helperText">Bahan</label>
-                      <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['bahan'] ?>" />
-                    </div>
-                  </div>
-                  <div class="col-4 col-sm-6 col-lg-3">
-                    <div class="form-group">
-                      <label for="helperText">jenis</label>
-                      <input type="text" id="helperText" class="form-control" placeholder="Name" value="<?= $produk['jenis'] ?>" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">BUAT PESANAN</h4>
-              </div>
-              <div class="card-content">
-                <div class="card-body">
-                  <form id="form_data_pesanan" class="form form-horizontal">
-                    <input type="hidden" name="produk_id" id="produk_id" value="<?= $produk['pesid'] ?>">
-                    <div class="form-body">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label>Nama Lengkap</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                          <input type="text" id="nama_pemesan" class="form-control" name="nama_pemesan" placeholder="First Name" required />
-                        </div>
-                        <div class="col-md-4">
-                          <label>Alamat Email</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                          <input type="text" id="email" class="form-control" value="" name="email" placeholder="First Name" required />
-                        </div>
-
-                        <div class="col-md-4">
-                          <label>Mobile</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                          <input type="number" id="contact-info" class="form-control" name="telpon" placeholder="telpon" required />
-                        </div>
-
-                        <div class="col-12 form-group">
-                          <div class="form-floating">
-                            <textarea class="form-control" placeholder="catatan" id="floatingTextarea" name="catatan" required></textarea>
-                            <label for="floatingTextarea">Catatan</label>
-                          </div>
-                        </div>
-
+                <form id="form_data_pesanan" class="form form-horizontal">
+                  <input type="hidden" name="produk_id" id="produk_id" value="<?= $produk['pesid'] ?>">
+                  <div class="form-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Nama Lengkap</label>
                       </div>
+                      <div class="col-md-8 form-group">
+                        <input type="text" id="nama_pemesan" class="form-control" name="nama_pemesan" placeholder="First Name" required />
+                      </div>
+                      <div class="col-md-4">
+                        <label>Alamat Email</label>
+                      </div>
+                      <div class="col-md-8 form-group">
+                        <input type="text" id="email" class="form-control" value="" name="email" placeholder="First Name" required />
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Mobile</label>
+                      </div>
+                      <div class="col-md-8 form-group">
+                        <input type="number" id="contact-info" class="form-control" name="telpon" placeholder="telpon" required />
+                      </div>
+
+                      <div class="col-12 form-group">
+                        <div class="form-floating">
+                          <textarea class="form-control" placeholder="catatan" id="floatingTextarea" name="catatan" required></textarea>
+                          <label for="floatingTextarea">Catatan</label>
+                        </div>
+                      </div>
+
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
+          </div>
 
-          </section>
-        </div>
-        <!-- card order -->
+        </section>
+      </div>
+      <!-- card order -->
 
-        <div id="card-order">
-          <button type="button" id="btn_pesan" class="btn btn-primary">
-            BELI SEKARANG
+      <div id="card-order">
+        <button type="button" id="btn_pesan" class="btn btn-primary">
+          BELI SEKARANG
 
-          </button>
-        </div>
+        </button>
       </div>
     </div>
   </div>

@@ -57,80 +57,78 @@ $data;
     <div id="main" class="layout-navbar navbar-fixed">
         <?php include_once 'navbar.php' ?>
         <div id="main-content">
-            <div id="main-content">
-                <div class="page-heading">
-                    <div class="d-flex">
-                        <div class="page-title mb-5 me-3">
-                            <a href="add-produk.php" class="btn btn-primary"> TAMBAH PRODUK</a>
-                        </div>
-                        <div class="page-title mb-5">
-                            <a href="add-kategori.php" class="btn btn-primary"> TAMBAH KATEGORI</a>
-                        </div>
-
-
+            <div class="page-heading">
+                <div class="d-flex">
+                    <div class="page-title mb-5 me-3">
+                        <a href="add-produk.php" class="btn btn-primary"> TAMBAH PRODUK</a>
+                    </div>
+                    <div class="page-title mb-5">
+                        <a href="add-kategori.php" class="btn btn-primary"> TAMBAH KATEGORI</a>
                     </div>
 
-                    <section class="section">
-
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Action</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody><?php foreach ($data as $r) : ?>
-                                            <tr>
-                                                <td><?= $r['bahan'] ?></td>
-                                                <td><?= $r['jenis'] ?></td>
-
-                                                <td>
-                                                    <form action="tambah-produk.php" method="post">
-                                                        <input type="hidden" value="<?= $r['pesid'] ?>" name="idproduk">
-                                                        <input type="submit" class="btn btn-sm btn-danger" name="hapusproduk" value="HAPUS">
-                                                    </form>
-
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>Bahan</th>
-                                            <th>Jenis</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody><?php foreach ($data as $r) : ?>
-                                            <tr>
-                                                <td><?= $r['bahan'] ?></td>
-                                                <td><?= $r['jenis'] ?></td>
-
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
 
                 </div>
-                <!-- card order -->
 
+                <section class="section">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Jenis</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody><?php foreach ($data as $r) : ?>
+                                        <tr>
+                                            <td><?= $r['bahan'] ?></td>
+                                            <td><?= $r['jenis'] ?></td>
+
+                                            <td>
+                                                <form action="tambah-produk.php" method="post">
+                                                    <input type="hidden" value="<?= $r['pesid'] ?>" name="idproduk">
+                                                    <input type="submit" class="btn btn-sm btn-danger" name="hapusproduk" value="HAPUS">
+                                                </form>
+
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Bahan</th>
+                                        <th>Jenis</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody><?php foreach ($data as $r) : ?>
+                                        <tr>
+                                            <td><?= $r['bahan'] ?></td>
+                                            <td><?= $r['jenis'] ?></td>
+
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
 
             </div>
+            <!-- card order -->
+
+
         </div>
     </div>
     <?php include_once 'footer.php' ?>
